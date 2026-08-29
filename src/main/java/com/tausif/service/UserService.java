@@ -1,5 +1,6 @@
 package com.tausif.service;
 
+import com.tausif.beans.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -9,4 +10,7 @@ public class UserService {
     @Value("${microWebService.user}")
     private String userUrl;
 
+    public boolean createUser(User user) {
+        return true;
+    }
 }
