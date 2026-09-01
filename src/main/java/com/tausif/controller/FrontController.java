@@ -1,5 +1,6 @@
 package com.tausif.controller;
 
+import com.tausif.beans.Complaint;
 import com.tausif.beans.User;
 import com.tausif.service.AdminService;
 import com.tausif.service.ComplaintService;
@@ -7,10 +8,12 @@ import com.tausif.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class FrontController {
@@ -44,6 +47,22 @@ public class FrontController {
     @GetMapping("/useerHome")
     public String userhome(){
         return "userHome";
+    }
+
+    @PostMapping("/complaintRegister")
+    public String complaintRegister(
+            @ModelAttribute Complaint complaint,
+            @RequestPart(required = true)MultipartFile e1,
+            @RequestPart(required = false)MultipartFile e2,
+            @RequestPart(required = false)MultipartFile e3) throws IOException {
+
+        boolean result = complaintService.createComplaint(complaint, e1, e2, e3);
+        if(result){
+
+        }else{
+
+        }
+        return "redirect:/userhome";
     }
 
 }
