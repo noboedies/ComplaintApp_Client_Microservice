@@ -14,6 +14,7 @@ public class UserService {
     private RestTemplate restTemplate = new RestTemplate();
 
     public boolean createUser(User user) {
-        return true;
+        Boolean result = restTemplate.postForObject(userUrl+ "/register", user, Boolean.class);
+        return result;
     }
 }
