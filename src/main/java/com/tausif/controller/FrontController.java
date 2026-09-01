@@ -12,6 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -44,7 +45,7 @@ public class FrontController {
         return "signup";
     }
 
-    @GetMapping("/useerHome")
+    @GetMapping("/userHome")
     public String userhome(){
         return "userHome";
     }
@@ -54,13 +55,14 @@ public class FrontController {
             @ModelAttribute Complaint complaint,
             @RequestPart(required = true)MultipartFile e1,
             @RequestPart(required = false)MultipartFile e2,
-            @RequestPart(required = false)MultipartFile e3) throws IOException {
+            @RequestPart(required = false)MultipartFile e3,
+            RedirectAttributes ra) throws IOException {
 
         boolean result = complaintService.createComplaint(complaint, e1, e2, e3);
         if(result){
-
+            ra.addFlashAttribute("msg", "Complaint Register Successfully!");
         }else{
-
+            ra.addFlashAttribute("msg", "Something went wrong");
         }
         return "redirect:/userhome";
     }
