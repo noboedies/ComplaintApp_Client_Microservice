@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 
 @Service
@@ -79,5 +81,10 @@ public class ComplaintService {
 
         return restTemplate.postForObject(complaintUrl+"/registerComplain", request, Boolean.class);
 
+    }
+
+    public List<Complaint> getAllComplaints() {
+        List<Complaint> c = restTemplate.getForObject(complaintUrl+"/getAllComplaints", List.class);
+        return c;
     }
 }

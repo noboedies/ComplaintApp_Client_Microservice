@@ -5,6 +5,7 @@ import com.tausif.beans.User;
 import com.tausif.service.AdminService;
 import com.tausif.service.ComplaintService;
 import com.tausif.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +47,7 @@ public class FrontController {
     }
 
     @GetMapping("/userHome")
-    public String userhome(){
+    public String userhome(HttpSession session, Model m){
         return "userHome";
     }
 
